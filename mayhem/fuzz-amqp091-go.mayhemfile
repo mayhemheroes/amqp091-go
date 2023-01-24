@@ -1,0 +1,4 @@
+project: amqp091
+target: fuzz-amqp091-go
+cmds:
+- cmd: /out/fuzz
