@@ -1,51 +1,11 @@
+# Disabled - Mayhem workflow only
 name: amqp091-go
-
 on:
   push:
-    branches: ["*"]
-  pull_request:
-    branches: [main]
-
+    branches: [ "disabled-by-mayhem-setup" ]
 jobs:
-  build-win32:
-    name: build/test on windows-latest
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        go-version: ['1.18', '1.19']
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
-        with:
-          go-version: ${{ matrix.go-version }}
-          check-latest: true
-      - name: Cache installers
-        uses: actions/cache@v3
-        with:
-          # Note: the cache path is relative to the workspace directory
-          # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#using-the-cache-action
-          path: ~/installers
-          key: ${{ runner.os }}-v0-${{ hashFiles('.ci/versions.json') }}
-      - name: Install and start RabbitMQ
-        run: ./.ci/install.ps1
-      - name: Tests
-        run: go test -cpu 1,2 -race -v -tags integration
-  build-linux:
-    name: build/test on ubuntu-latest
+  build:
+    name: disabled
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        go-version: ['1.18', '1.19']
-    services:
-      rabbitmq:
-        image: rabbitmq
-        ports:
-          - 5672:5672
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
-        with:
-          go-version: ${{ matrix.go-version }}
-          check-latest: true
-      - name: Tests
-        run: make tests
+    - run: echo "disabled"
