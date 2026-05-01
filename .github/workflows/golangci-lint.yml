@@ -1,28 +1,11 @@
----
+# Disabled - Mayhem workflow only
 name: golangci-lint
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - "*"
-
-permissions:
-  contents: read
-  pull-requests: read
-
+    branches: [ "disabled-by-mayhem-setup" ]
 jobs:
   golangci:
     name: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-go@v6
-        with:
-          go-version: 'stable'
-          check-latest: true
-      - uses: actions/checkout@v6
-      - uses: golangci/golangci-lint-action@v9
-        with:
-          version: latest
-          only-new-issues: false
+    - run: echo "disabled"
